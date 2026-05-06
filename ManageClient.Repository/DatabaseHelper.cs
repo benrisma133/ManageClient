@@ -1,14 +1,16 @@
 ﻿using Microsoft.Data.Sqlite;
 
-namespace ManageClient.Repository;
-
 public class DatabaseHelper
 {
-    private const string ConnectionString = "Data Source=clients.db";
+    private static string GetConnectionString()
+    {
+        var dbName = Environment.GetEnvironmentVariable("DB_NAME") ?? "clients.db";
+        return $"Data Source={dbName}";
+    }
 
     public static void InitializeDatabase()
     {
-        using var connection = new SqliteConnection(ConnectionString);
+        using var connection = new SqliteConnection(GetConnectionString());
         connection.Open();
 
         var command = connection.CreateCommand();
@@ -24,6 +26,6 @@ public class DatabaseHelper
 
     public static SqliteConnection GetConnection()
     {
-        return new SqliteConnection(ConnectionString);
+        return new SqliteConnection(GetConnectionString());
     }
 }

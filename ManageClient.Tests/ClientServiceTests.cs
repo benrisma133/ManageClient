@@ -1,30 +1,26 @@
 ﻿using ManageClient.Repository;
 using ManageClient.Repository.Models;
 using ManageClient.Service;
-
-using Xunit;
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+using Microsoft.Data.Sqlite;
 
 namespace ManageClient.Tests;
 
 public class ClientServiceTests : IDisposable
 {
-    private readonly string _dbName;
-
     public ClientServiceTests()
     {
-        _dbName = $"test_{Guid.NewGuid()}.db";
-
-        Environment.SetEnvironmentVariable("DB_NAME", _dbName);
+        // Use a separate test database — never touches your real data
+        Environment.SetEnvironmentVariable("DB_NAME", "test_clients.db");
         DatabaseHelper.InitializeDatabase();
     }
 
     public void Dispose()
     {
-        if (File.Exists(_dbName))
-        {
-            File.Delete(_dbName);
-        }
+        // Release all pooled native SQLite handles before deleting the file
+        SqliteConnection.ClearAllPools();
+
+        if (File.Exists("test_clients.db"))
+            File.Delete("test_clients.db");
     }
 
     // ─── Add ────────────────────────────────────────────────────────────────
