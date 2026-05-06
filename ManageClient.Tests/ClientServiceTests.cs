@@ -202,4 +202,17 @@ public class ClientServiceTests : IDisposable
         Assert.NotNull(found);
         Assert.Equal("Find Me", found.FullName);
     }
+
+
+    [Fact]
+    public void Login_Testing()
+    {
+        string username = "admin";
+        var password = "admin";
+
+        bool isSuccess = clsLogin.IsLogin(username, password);
+        Assert.True(isSuccess);
+
+    }
+
 }
