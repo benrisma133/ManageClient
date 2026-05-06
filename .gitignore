@@ -1,0 +1,24 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# SQLite database
+*.db
+*.db-shm
+*.db-wal
+
+# NuGet
+packages/
+project.lock.json
+
+# OS
+.DS_Store
+Thumbs.db
