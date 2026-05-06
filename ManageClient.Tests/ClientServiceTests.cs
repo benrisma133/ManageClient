@@ -2,6 +2,9 @@
 using ManageClient.Repository.Models;
 using ManageClient.Service;
 
+using Xunit;
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
+
 namespace ManageClient.Tests;
 
 public class ClientServiceTests : IDisposable
