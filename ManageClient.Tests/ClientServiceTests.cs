@@ -171,8 +171,8 @@ public class ClientServiceTests : IDisposable
     [Fact]
     public void GetAll_ReturnsAllAddedClients()
     {
-        var s1 = new ClientService { Client = new Client { FullName = "A", PhoneNumber = "0601000008", Email = "a@test.com" } };
-        var s2 = new ClientService { Client = new Client { FullName = "B", PhoneNumber = "0601000009", Email = "b@test.com" } };
+        var s1 = new ClientService { Client = new Client { FullName = "P", PhoneNumber = "0601000008", Email = "a@test.com" } };
+        var s2 = new ClientService { Client = new Client { FullName = "R", PhoneNumber = "0601000009", Email = "b@test.com" } };
         s1.Save();
         s2.Save();
 
