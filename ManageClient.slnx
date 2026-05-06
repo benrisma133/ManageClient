@@ -2,4 +2,5 @@
   <Project Path="ManageClient.Presentation/ManageClient.Presentation.csproj" />
   <Project Path="ManageClient.Repository/ManageClient.Repository.csproj" />
   <Project Path="ManageClient.Service/ManageClient.Service.csproj" />
+  <Project Path="ManageClient.Tests/ManageClient.Tests.csproj" />
 </Solution>
