@@ -6,18 +6,22 @@ namespace ManageClient.Tests;
 
 public class ClientServiceTests : IDisposable
 {
+    private readonly string _dbName;
+
     public ClientServiceTests()
     {
-        // Use a separate test database — never touches your real data
-        Environment.SetEnvironmentVariable("DB_NAME", "test_clients.db");
+        _dbName = $"test_{Guid.NewGuid()}.db";
+
+        Environment.SetEnvironmentVariable("DB_NAME", _dbName);
         DatabaseHelper.InitializeDatabase();
     }
 
     public void Dispose()
     {
-        // Clean up test database after each test
-        if (File.Exists("test_clients.db"))
-            File.Delete("test_clients.db");
+        if (File.Exists(_dbName))
+        {
+            File.Delete(_dbName);
+        }
     }
 
     // ─── Add ────────────────────────────────────────────────────────────────
@@ -29,9 +33,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Ismail Ben",
+                FullName    = "Ismail Ben",
                 PhoneNumber = "0601000001",
-                Email = "ismail@test.com"
+                Email       = "ismail@test.com"
             }
         };
 
@@ -49,9 +53,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Test User",
+                FullName    = "Test User",
                 PhoneNumber = "0601000002",
-                Email = "test@test.com"
+                Email       = "test@test.com"
             }
         };
 
@@ -69,9 +73,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Client One",
+                FullName    = "Client One",
                 PhoneNumber = "0601000003",
-                Email = "one@test.com"
+                Email       = "one@test.com"
             }
         };
         service1.Save();
@@ -80,9 +84,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Client Two",
+                FullName    = "Client Two",
                 PhoneNumber = "0601000003", // same phone
-                Email = "two@test.com"
+                Email       = "two@test.com"
             }
         };
 
@@ -98,9 +102,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Client One",
+                FullName    = "Client One",
                 PhoneNumber = "0601000004",
-                Email = "same@test.com"
+                Email       = "same@test.com"
             }
         };
         service1.Save();
@@ -109,9 +113,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Client Two",
+                FullName    = "Client Two",
                 PhoneNumber = "0601000005",
-                Email = "same@test.com" // same email
+                Email       = "same@test.com" // same email
             }
         };
 
@@ -129,9 +133,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Before Update",
+                FullName    = "Before Update",
                 PhoneNumber = "0601000006",
-                Email = "before@test.com"
+                Email       = "before@test.com"
             }
         };
         service.Save(); // AddNew → switches to Update mode
@@ -151,9 +155,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "To Delete",
+                FullName    = "To Delete",
                 PhoneNumber = "0601000007",
-                Email = "delete@test.com"
+                Email       = "delete@test.com"
             }
         };
         service.Save();
@@ -187,9 +191,9 @@ public class ClientServiceTests : IDisposable
         {
             Client = new Client
             {
-                FullName = "Find Me",
+                FullName    = "Find Me",
                 PhoneNumber = "0601000010",
-                Email = "findme@test.com"
+                Email       = "findme@test.com"
             }
         };
         service.Save();
