@@ -101,4 +101,27 @@ public partial class MainWindow : Window
         TxtEmail.Text = string.Empty;
         DgClients.SelectedItem = null;
     }
+
+    private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        string query = TxtSearch.Text.Trim().ToLower();
+
+        // Toggle placeholder and clear button
+        SearchHint.Visibility = string.IsNullOrEmpty(query) ? Visibility.Visible : Visibility.Collapsed;
+        BtnClearSearch.Visibility = string.IsNullOrEmpty(query) ? Visibility.Collapsed : Visibility.Visible;
+
+        var all = _clientService.GetAll();
+
+        DgClients.ItemsSource = string.IsNullOrEmpty(query)
+            ? all
+            : all.Where(c => c.FullName.ToLower().Contains(query) ||
+                             c.PhoneNumber.Contains(query)).ToList();
+    }
+
+    private void BtnClearSearch_Click(object sender, RoutedEventArgs e)
+    {
+        TxtSearch.Text = string.Empty;
+        TxtSearch.Focus();
+    }
+
 }
