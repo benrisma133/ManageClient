@@ -19,6 +19,8 @@ public class ClientServiceTests : IDisposable
         // Release all pooled native SQLite handles before deleting the file
         SqliteConnection.ClearAllPools();
 
+
+
         if (File.Exists("test_clients.db"))
             File.Delete("test_clients.db");
     }
